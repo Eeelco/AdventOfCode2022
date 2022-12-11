@@ -3,6 +3,7 @@ defmodule Tree do
   {:file, String.t(), integer}
   | {:dir, String.t(), list(tree)}
 
+  @spec build_tree(tree, list(String.t())) :: tree
   def build_tree(tree, []) do
     [tree, []]
   end
@@ -26,6 +27,7 @@ defmodule Tree do
       _     -> build_tree({type, name, [{:file, Enum.at(vals, 0), String.to_integer(op)} | children]}, tail)
     end
   end
+
 
   def mapsize({:file, _, size}) do
     {:file, size, []}
